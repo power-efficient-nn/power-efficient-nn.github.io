@@ -9,7 +9,7 @@
   - Title: **Low-precision data types and computation**
   - Speaker: Thomas Pfeil
 - 2:00 pm - 2:50 pm: Session 2
-  - Title: **Network quantization through data-driven weight optimization**
+  - Title: **Quantization algorithms fundamentals**
   - Speaker: Markus Nagel
 - 2:50 pm - 3:10 pm: Coffee break
 - 3:10 pm - 4:00 pm: Session 3
