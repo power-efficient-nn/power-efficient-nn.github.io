@@ -2,6 +2,10 @@
 
 [Tutorial at CVPR 2025, Nashville, USA, on June 12.](https://cvpr.thecvf.com/virtual/2025/tutorial/35922)
 
+## Abstract
+The growing size of neural networks, particularly in generative AI, poses significant challenges in terms of sustainability, time, and cost, hindering their study and practical application. Low-precision data types and computations, especially when natively supported by hardware, offer an effective solution, enabling broader research access and deployment on edge devices. However, to this end networks that are usually trained with high-precision data types have to be prepared for low-precision execution. In this tutorial, we review different low-precision data types and showcase typical challenges of their application, like outlier handling, on simple hands-on examples. In order to maintain the original task performance of neural networks, sophisticated quantization methods are required to compensate for quantization errors induced by low-precision data types. We introduce and compare the most common and effective methods to quantize neural networks and provide guidance for practitioners.
+
+
 ## Schedule
 
 - 1:00 pm - 1:10 pm: Opening remarks
