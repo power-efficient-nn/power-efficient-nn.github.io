@@ -5,14 +5,14 @@
 ## Schedule
 
 - 1:00 pm - 1:10 pm: Opening remarks
-- 1:10 pm - 2:00 pm: Session 1
+- 1:10 pm - 2:10 pm: Session 1
   - Title: **Low-precision data types and computation**
   - Speaker: Thomas Pfeil
-- 2:00 pm - 2:50 pm: Session 2
+- 2:10 pm - 3:10 pm: Session 2
   - Title: **Quantization algorithms fundamentals**
   - Speaker: Markus Nagel
-- 2:50 pm - 3:10 pm: Coffee break
-- 3:10 pm - 4:00 pm: Session 3
+- 3:10 pm - 3:30 pm: Coffee break
+- 3:30 pm - 4:30 pm: Session 3
   - Title: **Advanced LLM quantization methods**
   - Speaker: Tijmen Blankevoort
 
