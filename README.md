@@ -1,4 +1,4 @@
-# Power-efficient Neural Networks Using Low-precision Data Types and Quantization
+# Power-Efficient Neural Networks Using Low-Precision Data Types and Quantization
 
 [Tutorial at CVPR 2025, Nashville, USA, on June 12.](https://cvpr.thecvf.com/virtual/2025/tutorial/35922)
 
