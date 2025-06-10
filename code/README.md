@@ -1,3 +1,9 @@
-# Less bits. Log math. More compute.
+# Code as used in Session 1: Low-precision data types and computation
 
-Install the requirements from `requirements.txt` and run the marimo notebook via `marimo edit data_type_basics.py`.
+## Installation
+
+Install the requirements, e.g., `pip install -r requirements.txt`.
+
+## Execution
+
+Run the marimo notebook via `marimo edit data_types.py`.
