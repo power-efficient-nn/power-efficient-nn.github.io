@@ -53,13 +53,15 @@ def _(mo):
 def _(mo):
     _text = mo.md(
         r"""
-    ## Integer data types
+    ## Integer and fixed-point data types
 
     ### Definition:
 
-    $$x=\sum_{j=0}^{I-1} i_{j} 2^{j}$$
+    $$x=s * \sum_{j=0}^{I+F-1} b_{j} 2^{j - F}$$
 
-    where $i_j$ are the bits encoding an integer with $I$ bits.
+    where $I$ and $F$ are the number of integer and fraction bits, $b_j$ are the bits encoding an integer or fixed-point number, and $s$ is the sign bit.
+
+    Note that compared to this sign-magnitude representation the two's complement represention is more common in practice.
 
     ### Examples:
     """,
