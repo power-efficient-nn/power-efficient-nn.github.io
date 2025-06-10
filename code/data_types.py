@@ -59,9 +59,12 @@ def _(mo):
 
     $$x=s * \sum_{j=0}^{I+F-1} b_{j} 2^{j - F}$$
 
-    where $I$ and $F$ are the number of integer and fraction bits, $b_j$ are the bits encoding an integer or fixed-point number, and $s$ is the sign bit.
+    where $I$ and $F$ are the number of integer and fraction bits,
+    $b_j$ are the bits encoding an integer or fixed-point number,
+    and $s$ is the sign bit.
 
-    Note that compared to this sign-magnitude representation the two's complement represention is more common in practice.
+    Note that compared to this sign-magnitude representation
+    the two's complement represention is more common in practice.
 
     ### Examples:
     """,
@@ -374,7 +377,7 @@ def _(Figure, go):
         fig.update_layout(
             title={"text": title},
             xaxis={"title": {"text": "value"}},
-            yaxis={"visible": False},
+            yaxis={"visible": False, "range": [-1, 3]},
             height=275,
         )
 
@@ -655,6 +658,12 @@ def _(Figure, Optional, get_errors, go):
         row: int = 1,
         col: int = 1,
     ):
+        quant_type = ""
+        if color == "red":
+            quant_type = "tensor-wise"
+        if color == "blue":
+            quant_type = "block-wise"
+
         xlim = [-max(values + values_quant) * 0.02, max(values + values_quant) * 1.02]
         if show_identity:
             fig.add_trace(
@@ -673,7 +682,7 @@ def _(Figure, Optional, get_errors, go):
                         opacity=0.2,
                         showlegend=not bool(index),
                         legendgroup=color + "_qlevel",
-                        name="quantization level",
+                        name=f"quantization level<br>({quant_type})",
                     ),
                     row=row,
                     col=col,
@@ -685,7 +694,7 @@ def _(Figure, Optional, get_errors, go):
                 mode="markers",
                 marker_color=color,
                 legendgroup=color + "_qvalue",
-                name="quantized values",
+                name=f"quantized values<br>({quant_type})",
             ),
             row=row,
             col=col,
