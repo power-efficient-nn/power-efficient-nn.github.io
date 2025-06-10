@@ -1,0 +1,2 @@
+plotly
+marimo==0.13.15

@@ -1,0 +1,9 @@
+.katex, .katex-display { font-size: 1.15em; }
+
+.katex .scriptstyle,
+.katex .style-script,
+.katex .size3 { font-size: 0.7em !important; }
+
+.katex .scriptscriptstyle,
+.katex .style-scriptscript,
+.katex .size2 { font-size: 0.5em !important; }
