@@ -45,4 +45,15 @@ The growing size of neural networks, particularly in generative AI, poses signif
       <a href="https://www.linkedin.com/in/tijmen-blankevoort-a5633a24/">Tijmen Blankevoort</a>
     </td>
   </tr>
+  <tr>
+    <td>
+      <a href="https://www.recogni.com/">Recogni</a>
+    </td>
+    <td>
+      <a href="https://www.qualcomm.com/">Qualcomm</a>
+    </td>
+    <td>
+      <a href="https://www.meta.com/">Meta</a>
+    </td>
+  </tr>
 </table>
