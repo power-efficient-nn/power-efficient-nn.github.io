@@ -607,7 +607,13 @@ def _(get_data_distrib, go, mo, num_feat, update_layout_distrib):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(r"""## Tensor-wise quantization""")
+    _text = mo.md(
+        r"""
+    ## Tensor-wise quantization
+    """,
+    )
+    _img = mo.image("public/data_type/tensor.png", width=200)
+    mo.vstack([_text, _img])
     return
 
 
@@ -762,7 +768,13 @@ def _(
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(r"""## Block-wise quantization""")
+    _text = mo.md(
+        r"""
+    ## Block-wise quantization
+    """,
+    )
+    _img = mo.image("public/data_type/block.png", width=200)
+    mo.vstack([_text, _img])
     return
 
 
