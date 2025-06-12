@@ -699,31 +699,6 @@ def _(Figure, Optional, get_errors, go):
         fig.update_xaxes(title_text="original values", range=xlim, row=row, col=col)
         fig.update_yaxes(title_text="quantized values", range=xlim, row=row, col=col)
 
-    def update_layout_tensorq(fig: Figure):
-        fig.update_layout(title={"text": "Tensor-wise quantization"})
-
-    return plot_rel_error, plot_scatter, update_layout_tensorq
-
-
-@app.cell
-def _(
-    Figure,
-    Optional,
-    get_data_distrib,
-    normalize,
-    plot_rel_error,
-    plot_scatter,
-    quantize,
-):
-    num_feat = 128
-
-    def quantize_scaled(values: list[float], quant_levels_norm: list[float]) -> tuple[list[float], list[float]]:
-        values_norm, scaling_factor = normalize(values)
-        values_norm_quant = quantize(values_norm, quant_levels_norm)
-        values_reconstr = [scaling_factor * x for x in values_norm_quant]
-        quant_levels = [x * scaling_factor for x in quant_levels_norm]
-        return values_reconstr, quant_levels
-
     def plot_error_scatter(
         fig: Figure,
         values: list[float],
@@ -736,12 +711,29 @@ def _(
         plot_rel_error(fig, values, values_quant, color)
         plot_scatter(fig, values, values_quant, color, quant_levels=quant_levels, show_identity=show_identity)
 
+    def update_layout_tensorq(fig: Figure):
+        fig.update_layout(title={"text": "Tensor-wise quantization"})
+
+    return plot_error_scatter, update_layout_tensorq
+
+
+@app.cell
+def _(Figure, get_data_distrib, normalize, plot_error_scatter, quantize):
+    num_feat = 128
+
+    def quantize_scaled(values: list[float], quant_levels_norm: list[float]) -> tuple[list[float], list[float]]:
+        values_norm, scaling_factor = normalize(values)
+        values_norm_quant = quantize(values_norm, quant_levels_norm)
+        values_reconstr = [scaling_factor * x for x in values_norm_quant]
+        quant_levels = [x * scaling_factor for x in quant_levels_norm]
+        return values_reconstr, quant_levels
+
     def plot_outliers(fig: Figure, quant_levels_norm: list[float], with_outlier: bool):
         values = get_data_distrib(num_feat, with_outlier=with_outlier)
         values_quant, quant_levels = quantize_scaled(values, quant_levels_norm)
         plot_error_scatter(fig, values, values_quant, "red", quant_levels=quant_levels)
 
-    return num_feat, plot_error_scatter, plot_outliers, quantize_scaled
+    return num_feat, plot_outliers, quantize_scaled
 
 
 @app.cell(hide_code=True)
@@ -870,7 +862,7 @@ def _(index_slider, make_subplots, mo, plot_block_quant):
     return
 
 
-@app.cell
+@app.cell(hide_code=True)
 def _(
     Figure,
     get_block,
@@ -1016,10 +1008,10 @@ def _(Figure, go):
             )
         fig.add_trace(go.Scatter(x=values, y=values_lin2log_mitchell, name="lin2log"), row=1, col=1)
         fig.update_xaxes(title_text="value in linear space", row=1, col=1)
-        fig.update_yaxes(title_text="value in log space", row=1, col=1)
+        fig.update_yaxes(title_text="value converted to log space", row=1, col=1)
         fig.add_trace(go.Scatter(x=values, y=values_log2lin_mitchell, name="log2lin"), row=1, col=2)
         fig.update_xaxes(title_text="value in log space", row=1, col=2)
-        fig.update_yaxes(title_text="value in linear space", row=1, col=2)
+        fig.update_yaxes(title_text="value converted to linear space", row=1, col=2)
 
     def update_layout_mitchell(fig: Figure):
         fig.update_layout(title={"text": "Mitchell's approximation for e=1"})
@@ -1096,7 +1088,7 @@ def _(Figure, go):
                 marker_color="blue",
                 opacity=0.2,
                 legendgroup="qe",
-                name="quantization error",
+                name="quantization error of LNS8",
             ),
         )
         fig.add_trace(
@@ -1111,7 +1103,7 @@ def _(Figure, go):
             ),
         )
         fig.update_xaxes(title_text="standard dot product")
-        fig.update_yaxes(title_text="dot product in log space using Mitchell")
+        fig.update_yaxes(title_text="dot product using log math and Mitchell")
 
     def plot_point(fig: Figure, result: float, result_mitchell: float, showlegend: bool):
         fig.add_trace(
