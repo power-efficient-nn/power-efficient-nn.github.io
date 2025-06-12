@@ -15,6 +15,7 @@ The growing size of neural networks, particularly in generative AI, poses signif
 - 2:10 pm - 3:10 pm: Session 2
   - Title: **Quantization algorithms fundamentals**
   - Speaker: Markus Nagel
+  - [Slides](https://github.com/power-efficient-nn/power-efficient-nn.github.io/blob/main/slides/s2_quantization_algorithms_fundamentals.pdf)
 - 3:10 pm - 3:30 pm: Coffee break
 - 3:30 pm - 4:30 pm: Session 3
   - Title: **Advanced LLM quantization methods**
