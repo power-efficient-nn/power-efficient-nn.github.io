@@ -72,7 +72,7 @@ def _(mo):
     _img_uint = mo.image("public/data_type/uint.png", width=438)
     _img_fixedp = mo.image("public/data_type/fixedp.png", width=482)
     _img_int = mo.image("public/data_type/int.png", width=420)
-    mo.vstack([_text, _img_uint, _img_fixedp, _img_int])
+    mo.vstack([_text, _img_uint, _img_int, _img_fixedp])
     return
 
 
@@ -176,10 +176,10 @@ def _(mo):
 
     ### Definition:
 
-    $$x=2^{e} (1 + \hat{m})=2^{e} (1 + 0.m)$$
+    $$x=2^{e +EB} (1 + 0.m)$$
 
-    with $\hat{m} = \frac{m}{2^M}$.
-    The exponent $e$ and mantissa $m$ values are integers encoded with $E$ and $M$ bits, respectively.
+    where the exponent $e$ and mantissa $m$ are unsigned $E$-bit integer and $M$-bit fixed-point values, respectively.
+    $EB=-(2^{E-1}-1)$ is the so-called exponent bias.
 
     ### Example:
     """,
@@ -191,22 +191,21 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    def print_fp(sign_value: int, exp_value: int, mant_value: int, num_exp_bits: int, num_mant_bits: int):
+    def print_fp(sign_value: int, exp_value: int, mant_value: float, num_exp_bits: int):
         sign = -1 if sign_value else 1
         sign_str = "-" if sign_value else ""
         exponent_bias = -(2 ** (num_exp_bits - 1) - 1)
-        mant_shift = 2**num_mant_bits
         exp_eff = exp_value + exponent_bias
-        mant_eff = 1.0 + mant_value / mant_shift
+        mant_eff = 1.0 + mant_value
         value = sign * (2**exp_eff) * mant_eff
         md = mo.md(
             f"\\begin{{align}}"
-            f"x &= {{{sign_str}}} 2^{{{exp_value}{exponent_bias}}}(1 + \\frac{{{mant_value}}}{{{mant_shift}}}) \\\\"
+            f"x &= {{{sign_str}}} 2^{{{exp_value}{exponent_bias}}}(1 + {mant_value}) \\\\"
             f"&= {{{sign_str}}} 2^{{{exp_eff}}} \\cdot {mant_eff} \\\\"
             f"&= {value}"
             f"\\end{{align}}",
         )
-        value_ref = get_fp_value(sign_value, exp_value, mant_value, num_exp_bits, num_mant_bits)
+        value_ref = get_fp_value(sign_value, exp_value, mant_value, num_exp_bits)
         if value != value_ref:
             msg = f"print ({value}) does not match with function to get value ({value_ref})"
             raise ValueError(msg)
@@ -216,11 +215,10 @@ def _(mo):
 
 
 @app.function
-def get_fp_value(sign_value: int, exp_value: int, mant_value: int, num_exp_bits: int, num_mant_bits: int) -> float:
+def get_fp_value(sign_value: int, exp_value: int, mant_value: float, num_exp_bits: int) -> float:
     sign = -1 if sign_value else 1
     exponent_bias = -(2 ** (num_exp_bits - 1) - 1)
-    mant_shift = 2**num_mant_bits
-    return sign * (2 ** (exp_value + exponent_bias)) * (1.0 + mant_value / mant_shift)
+    return sign * (2 ** (exp_value + exponent_bias)) * (1.0 + mant_value)
 
 
 @app.cell(hide_code=True)
@@ -242,8 +240,8 @@ def _(fp_exp_box, fp_mant_box, fp_sign_box, print_fp):
         raise ValueError(_msg)
     fp_sign = binary_to_int(fp_sign_binary)
     fp_exp = binary_to_int(fp_exp_binary)
-    fp_mant = binary_to_int(fp_mant_binary)
-    print_fp(fp_sign, fp_exp, fp_mant, 4, 3)
+    fp_mant = binary_to_int(fp_mant_binary, num_frac_bits=3)
+    print_fp(fp_sign, fp_exp, fp_mant, 4)
     return
 
 
@@ -255,10 +253,9 @@ def _(mo):
 
     ### Definition:
 
-    $$x=2^{i + \hat{f}}=2^{i.f}$$
+    $$x=2^{i.f + EB}$$
 
-    with $\hat{f} = \frac{f}{2^F}$.
-    The integer $i$ and fraction $f$ values are integers encoded with $I$ and $F$ bits, respectively.
+    where $i.f$ is a fixed-point number with $I$ integer and $F$ fraction bits.
 
     ### Example:
     """,
@@ -270,21 +267,20 @@ def _(mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    def print_lns(sign_value: int, int_value: int, frac_value: int, num_int_bits: int, num_frac_bits: int):
+    def print_lns(sign_value: int, int_value: int, frac_value: float, num_int_bits: int):
         sign = -1 if sign_value else 1
         sign_str = "-" if sign_value else ""
         exponent_bias = -(2 ** (num_int_bits - 1) - 1)
-        frac_shift = 2**num_frac_bits
-        exp = int_value + frac_value / frac_shift + exponent_bias
+        exp = int_value + frac_value + exponent_bias
         value = sign * (2**exp)
         md = mo.md(
             f"\\begin{{align}}"
-            f"x &= {{{sign_str}}} 2^{{{int_value} + \\frac{{{frac_value}}}{{{frac_shift}}}{exponent_bias}}} \\\\"
+            f"x &= {{{sign_str}}} 2^{{{int_value} + {frac_value} {exponent_bias}}} \\\\"
             f"&= {{{sign_str}}} 2^{{{exp}}} \\\\"
             f"&= {value}"
             f"\\end{{align}}",
         )
-        value_ref = get_lns_value(sign_value, int_value, frac_value, num_int_bits, num_frac_bits)
+        value_ref = get_lns_value(sign_value, int_value, frac_value, num_int_bits)
         if value != value_ref:
             msg = f"print ({value}) does not match with function to get value ({value_ref})"
             raise ValueError(msg)
@@ -294,11 +290,10 @@ def _(mo):
 
 
 @app.function
-def get_lns_value(sign_value: int, int_value: int, frac_value: int, num_int_bits: int, num_frac_bits: int) -> float:
+def get_lns_value(sign_value: int, int_value: int, frac_value: float, num_int_bits: int) -> float:
     sign = -1 if sign_value else 1
     exponent_bias = -(2 ** (num_int_bits - 1) - 1)
-    frac_shift = 2**num_frac_bits
-    return sign * (2 ** (int_value + frac_value / frac_shift + exponent_bias))
+    return sign * (2 ** (int_value + frac_value + exponent_bias))
 
 
 @app.cell(hide_code=True)
@@ -320,8 +315,8 @@ def _(lns_frac_box, lns_int_box, lns_sign_box, print_lns):
         raise ValueError(_msg)
     lns_sign = binary_to_int(lns_sign_binary)
     lns_int = binary_to_int(lns_int_binary)
-    lns_frac = binary_to_int(lns_frac_binary)
-    print_lns(lns_sign, lns_int, lns_frac, 4, 3)
+    lns_frac = binary_to_int(lns_frac_binary, num_frac_bits=3)
+    print_lns(lns_sign, lns_int, lns_frac, 4)
     return
 
 
@@ -347,8 +342,9 @@ def _(Figure, go):
     def get_fp_values(num_exp_bits: int, num_mant_bits: int) -> list[float]:
         exp_values = range(2**num_exp_bits)
         mant_values = range(2**num_mant_bits)
+        mant_shift = 2**num_mant_bits
         return [
-            get_fp_value(0, exp_value, mant_value, num_exp_bits, num_mant_bits)
+            get_fp_value(0, exp_value, mant_value / mant_shift, num_exp_bits)
             for exp_value in exp_values
             for mant_value in mant_values
         ]
@@ -356,8 +352,9 @@ def _(Figure, go):
     def get_lns_values(num_int_bits: int, num_frac_bits: int) -> list[float]:
         int_values = range(2**num_int_bits)
         frac_values = range(2**num_frac_bits)
+        frac_shift = 2**num_frac_bits
         return [
-            get_lns_value(0, int_value, frac_value, num_int_bits, num_frac_bits)
+            get_lns_value(0, int_value, frac_value / frac_shift, num_int_bits)
             for int_value in int_values
             for frac_value in frac_values
         ]
