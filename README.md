@@ -20,6 +20,7 @@ The growing size of neural networks, particularly in generative AI, poses signif
 - 3:30 pm - 4:30 pm: Session 3
   - Title: **Advanced LLM quantization methods**
   - Speaker: Tijmen Blankevoort
+  - [Slides](https://github.com/power-efficient-nn/power-efficient-nn.github.io/blob/main/slides/s3_LLM-quantization.pptx)
 
 ## Speaker
 
