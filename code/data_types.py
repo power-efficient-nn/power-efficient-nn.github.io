@@ -57,7 +57,7 @@ def _(mo):
 
     ### Definition:
 
-    $$x=s * \sum_{j=0}^{I+F-1} b_{j} 2^{j - F}$$
+    $$x=(-1)^s \sum_{j=0}^{I+F-1} b_{j} 2^{j - F}$$
 
     where $I$ and $F$ are the number of integer and fraction bits,
     $b_j$ are the bits encoding an integer or fixed-point number,
@@ -106,12 +106,15 @@ def _(mo):
         if pow_str == "":
             pow_str = "0"
             value_str = "0"
+        sign_str = ""
         if sign == -1:
+            sign_str = "-"
             pow_str = f"-({pow_str})"
             value_str = f"-({value_str})"
+
         return mo.md(
             f"\\begin{{align}}"
-            f"x &= \\text{{0b}}{binary} \\\\"
+            f"x &= {sign_str}\\text{{0b}}{binary} \\\\"
             f"&= {pow_str} \\\\"
             f"&= {value_str} \\\\"
             f"&= {value}"
@@ -176,7 +179,7 @@ def _(mo):
 
     ### Definition:
 
-    $$x=2^{e +EB} (1 + 0.m)$$
+    $$x=(-1)^s 2^{e +EB} (1 + 0.m)$$
 
     where the exponent $e$ and mantissa $m$ are unsigned $E$-bit integer and $M$-bit fixed-point values, respectively.
     $EB=-(2^{E-1}-1)$ is the so-called exponent bias.
@@ -253,7 +256,7 @@ def _(mo):
 
     ### Definition:
 
-    $$x=2^{i.f + EB}$$
+    $$x=(-1)^s 2^{i.f + EB}$$
 
     where $i.f$ is a fixed-point number with $I$ integer and $F$ fraction bits.
 
