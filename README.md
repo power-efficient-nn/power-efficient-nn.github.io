@@ -11,7 +11,7 @@ The growing size of neural networks, particularly in generative AI, poses signif
 - 1:10 pm - 2:10 pm: Session 1
   - Title: **Low-precision data types and computation**
   - Speaker: Thomas Pfeil
-  - [Slides](https://github.com/power-efficient-nn/power-efficient-nn.github.io/blob/main/slides/s1_Low-precision-data-types-and-computation.pdf) / [Code](https://github.com/power-efficient-nn/power-efficient-nn.github.io/tree/main/code)
+  - [Video](https://www.youtube.com/watch?v=338ZffLKglc) / [Slides](https://github.com/power-efficient-nn/power-efficient-nn.github.io/blob/main/slides/s1_Low-precision-data-types-and-computation.pdf) / [Code](https://github.com/power-efficient-nn/power-efficient-nn.github.io/tree/main/code)
 - 2:10 pm - 3:10 pm: Session 2
   - Title: **Quantization algorithms fundamentals**
   - Speaker: Markus Nagel
