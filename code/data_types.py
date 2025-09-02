@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.13.15"
+__generated_with = "0.15.2"
 app = marimo.App(width="full", css_file="./custom.css")
 
 
@@ -120,7 +120,6 @@ def _(mo):
             f"&= {value}"
             f"\\end{{align}}",
         )
-
     return (print_int,)
 
 
@@ -213,7 +212,6 @@ def _(mo):
             msg = f"print ({value}) does not match with function to get value ({value_ref})"
             raise ValueError(msg)
         return md
-
     return (print_fp,)
 
 
@@ -288,7 +286,6 @@ def _(mo):
             msg = f"print ({value}) does not match with function to get value ({value_ref})"
             raise ValueError(msg)
         return md
-
     return (print_lns,)
 
 
@@ -380,7 +377,6 @@ def _(Figure, go):
             yaxis={"visible": False, "range": [-1, 3]},
             height=275,
         )
-
     return (
         get_fp_values,
         get_int_values,
@@ -430,6 +426,55 @@ def _(
     return (quant_levels_dict,)
 
 
+@app.cell
+def _(get_fp_values, get_lns_values, go, mo):
+    import numpy as np
+
+    lns_values = np.array(get_lns_values(4, 3)[0:25])
+    lns_steps = lns_values[1:] - lns_values[:-1]
+    fp_values = np.array(get_fp_values(4, 3)[0:25])
+    fp_steps = fp_values[1:] - fp_values[:-1]
+
+    _fig = go.Figure()
+    _fig.add_trace(go.Scatter(x=fp_values[1:], y=fp_steps, name="FP8", mode="lines+markers", marker=dict(color="red")))
+    _fig.add_trace(go.Scatter(x=lns_values[1:], y=lns_steps, name="LNS8", mode="lines+markers", marker=dict(color="blue")))
+
+    axis_kwargs = dict(
+        showgrid=False,
+        # frame
+        showline=True,
+        linewidth=2,
+        linecolor="black",
+        mirror=True,
+        # ticks
+        showticklabels=True,
+        ticks="outside",
+        ticklen=8,
+        tickwidth=2,
+        tickcolor="black",
+    )
+    _fig.update_layout(
+        legend=dict(
+            x=0.95,
+            y=0.05,
+            xanchor="right",
+            yanchor="bottom",
+            bgcolor="rgba(255,255,255,1.0)",
+            bordercolor="rgba(215,215,215,1.0)",
+            borderwidth=2,
+        ),
+        xaxis=dict(title="Value") | axis_kwargs,
+        yaxis=dict(title="Step size") | axis_kwargs,
+        plot_bgcolor="rgba(0,0,0,0)",
+        paper_bgcolor="rgba(0,0,0,0)",
+        margin=dict(l=20, r=20, t=20, b=20),
+    )
+
+    _fig.write_image("delme.png", width=600, height=400, scale=4)
+    mo.ui.plotly(_fig)
+    return
+
+
 @app.cell(hide_code=True)
 def _(mo):
     mo.md(
@@ -451,7 +496,6 @@ def _():
 
     def quantize(values: list[float], quant_levels: list[float]) -> list[float]:
         return [get_closest_quant_value(x, quant_levels) for x in values]
-
     return (quantize,)
 
 
@@ -493,7 +537,6 @@ def _(Figure):
             xaxis={"title": {"text": xaxis_label}, "type": xaxis_type},
             yaxis={"title": {"text": yaxis_label}},
         )
-
     return (
         clamp_values_range,
         get_error,
@@ -541,7 +584,6 @@ def _(
             quant_levels = quant_levels_dict[data_type]
             plot_quant_error(fig, values, quant_levels, error_type, normalized, data_type)
         update_layout_qerror(fig, xaxis_type, normalized, error_type)
-
     return (plot_quant_errors,)
 
 
@@ -594,7 +636,6 @@ def _(Figure, random):
             xaxis={"title": {"text": "value"}},
             yaxis={"title": {"text": "count"}},
         )
-
     return get_data_distrib, update_layout_distrib
 
 
@@ -716,7 +757,6 @@ def _(Figure, Optional, get_errors, go):
 
     def update_layout_tensorq(fig: Figure):
         fig.update_layout(title={"text": "Tensor-wise quantization"})
-
     return plot_error_scatter, update_layout_tensorq
 
 
@@ -735,7 +775,6 @@ def _(Figure, get_data_distrib, normalize, plot_error_scatter, quantize):
         values = get_data_distrib(num_feat, with_outlier=with_outlier)
         values_quant, quant_levels = quantize_scaled(values, quant_levels_norm)
         plot_error_scatter(fig, values, values_quant, "red", quant_levels=quant_levels)
-
     return num_feat, plot_outliers, quantize_scaled
 
 
@@ -786,7 +825,6 @@ def _(Figure):
 
     def update_layout_tensorvsblock(fig: Figure):
         fig.update_layout(title={"text": "Comparison between tensor- and block-wise quantization"})
-
     return update_layout_blockq, update_layout_tensorvsblock
 
 
@@ -833,7 +871,6 @@ def _(
             show_identity=False,
         )
         update_layout_blockq(fig, index_block)
-
     return get_block, plot_block_quant
 
 
@@ -1018,7 +1055,6 @@ def _(Figure, go):
 
     def update_layout_mitchell(fig: Figure):
         fig.update_layout(title={"text": "Mitchell's approximation for e=1"})
-
     return add_traces_mitchell, update_layout_mitchell
 
 
@@ -1040,7 +1076,6 @@ def _(Figure, add_traces_mitchell, math):
         values_lin2log_mitchell = [2 ** lin2log_mitchell(x) for x in values]
         values_log2lin_mitchell = [math.log2(log2lin_mitchell(x)) for x in values]
         add_traces_mitchell(fig, values, values_lin2log_mitchell, values_log2lin_mitchell)
-
     return lin2log_mitchell, log2lin_mitchell, plot_mitchell
 
 
@@ -1123,7 +1158,6 @@ def _(Figure, go):
 
     def update_layout_mitchellerror(fig: Figure):
         fig.update_layout(title={"text": "Error of dot products using Mitchell's approximations"})
-
     return plot_point, plot_qerror, update_layout_mitchellerror
 
 
