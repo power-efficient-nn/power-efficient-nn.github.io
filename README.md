@@ -8,32 +8,33 @@ The growing size of neural networks, particularly in generative AI, poses signif
 ## Schedule
 
 - 1:00 pm - 1:10 pm: Opening remarks
+  - [Recording](https://youtu.be/yfQgb8-_l00?feature=shared)
 - 1:10 pm - 2:10 pm: Session 1
   - Title: **Low-precision data types and computation**
   - Speaker: Thomas Pfeil
-  - [Video](https://www.youtube.com/watch?v=338ZffLKglc) / [Slides](https://github.com/power-efficient-nn/power-efficient-nn.github.io/blob/main/slides/s1_Low-precision-data-types-and-computation.pdf) / [Code](https://github.com/power-efficient-nn/power-efficient-nn.github.io/tree/main/code)
+  - [Recording](https://youtu.be/yfQgb8-_l00?feature=shared&t=331) / [High-quality recording](https://www.youtube.com/watch?v=338ZffLKglc) / [Slides](https://github.com/power-efficient-nn/power-efficient-nn.github.io/blob/main/slides/s1_Low-precision-data-types-and-computation.pdf) / [Code](https://github.com/power-efficient-nn/power-efficient-nn.github.io/tree/main/code)
 - 2:10 pm - 3:10 pm: Session 2
   - Title: **Quantization algorithms fundamentals**
   - Speaker: Markus Nagel
-  - [Slides](https://github.com/power-efficient-nn/power-efficient-nn.github.io/blob/main/slides/s2_quantization_algorithms_fundamentals.pdf)
+  - [Recording](https://youtu.be/yfQgb8-_l00?feature=shared&t=3940) / [Slides](https://github.com/power-efficient-nn/power-efficient-nn.github.io/blob/main/slides/s2_quantization_algorithms_fundamentals.pdf)
 - 3:10 pm - 3:30 pm: Coffee break
 - 3:30 pm - 4:30 pm: Session 3
   - Title: **Advanced LLM quantization methods**
   - Speaker: Tijmen Blankevoort
-  - [Slides](https://github.com/power-efficient-nn/power-efficient-nn.github.io/blob/main/slides/s3_LLM-quantization.pptx)
+  - [Recording](https://youtu.be/yfQgb8-_l00?feature=shared&t=9001) / [Slides](https://github.com/power-efficient-nn/power-efficient-nn.github.io/blob/main/slides/s3_LLM-quantization.pptx)
 
 ## Speaker
 
 <table>
   <tr>
     <td  width="20%">
-      <img src="https://media.licdn.com/dms/image/v2/C4E03AQEZqm9cU69qEA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1607006591577?e=1754524800&v=beta&t=EoNXXm135cxH1dMIa51wlkTSbzhkqOhHMkeSmZgE33Q">
+      <img src="https://media.licdn.com/dms/image/v2/C4E03AQEZqm9cU69qEA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1607006591577?e=1759968000&v=beta&t=s7mO5Gt6QOZgoTZl4ooKgdLb-qLy79fd99D9R5hMToo">
     </td>
     <td  width="20%">
-      <img src="https://media.licdn.com/dms/image/v2/C4E03AQGvq0rqOpOBqw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1516430227052?e=1754524800&v=beta&t=889tJ9oIVAQHBW0qUxkyeg4WKKFCW4aGVGlIdXrryfA">
+      <img src="https://media.licdn.com/dms/image/v2/C4E03AQGvq0rqOpOBqw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1516430227052?e=1759968000&v=beta&t=4VgUlNf3kMVE9-CBJuab_oGIntqIYJlc1TuEkA2GvQU">
     </td>
     <td  width="20%">
-      <img src="https://media.licdn.com/dms/image/v2/D4E03AQGAZwkHCUrwIg/profile-displayphoto-shrink_800_800/B4EZOuD8d7HEAg-/0/1733792090802?e=1754524800&v=beta&t=mSdRQ8Ibm0vFRUCb2gG0nXDx_eoCmbDENJXF-nln__U">
+      <img src="https://media.licdn.com/dms/image/v2/D4E03AQGAZwkHCUrwIg/profile-displayphoto-shrink_800_800/B4EZOuD8d7HEAg-/0/1733792090802?e=1759968000&v=beta&t=c_fDyxqVt23s6ndVwm-CqjcsAu5l7IuzCjpcVI0MgJA">
     </td>
   </tr>
   <tr>
