@@ -28,13 +28,13 @@ The growing size of neural networks, particularly in generative AI, poses signif
 <table>
   <tr>
     <td  width="20%">
-      <img src="https://media.licdn.com/dms/image/v2/C4E03AQEZqm9cU69qEA/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1607006591577?e=1759968000&v=beta&t=s7mO5Gt6QOZgoTZl4ooKgdLb-qLy79fd99D9R5hMToo">
+      <img src="pics/thomas.jpeg">
     </td>
     <td  width="20%">
-      <img src="https://media.licdn.com/dms/image/v2/C4E03AQGvq0rqOpOBqw/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1516430227052?e=1759968000&v=beta&t=4VgUlNf3kMVE9-CBJuab_oGIntqIYJlc1TuEkA2GvQU">
+      <img src="pics/markus.jpeg">
     </td>
     <td  width="20%">
-      <img src="https://media.licdn.com/dms/image/v2/D4E03AQGAZwkHCUrwIg/profile-displayphoto-shrink_800_800/B4EZOuD8d7HEAg-/0/1733792090802?e=1759968000&v=beta&t=c_fDyxqVt23s6ndVwm-CqjcsAu5l7IuzCjpcVI0MgJA">
+      <img src="pics/tijmen.jpeg">
     </td>
   </tr>
   <tr>
